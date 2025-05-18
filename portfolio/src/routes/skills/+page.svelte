@@ -5,6 +5,3 @@
     <a href="/experience">Experience</a>
     <a href="/education">Education</a>
 </nav>
-
-<h1>home</h1>
-<p>this is the home page.</p>
