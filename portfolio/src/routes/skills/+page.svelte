@@ -45,7 +45,7 @@
     }
 
   .skills-section {
-    padding: 2rem;
+    margin: 2rem 0;
   }
 
   .category {
