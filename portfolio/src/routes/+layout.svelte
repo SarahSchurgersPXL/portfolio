@@ -16,12 +16,13 @@
       <a href="/projects" class="nav-link">
         <i class="fas fa-code"></i> Projects
       </a>
+      <a href="/education" class="nav-link">
+        <i class="fas fa-graduation-cap"></i> Education
+      </a>   
       <a href="/experience" class="nav-link">
         <i class="fas fa-briefcase"></i> Experience
       </a>
-      <a href="/education" class="nav-link">
-        <i class="fas fa-graduation-cap"></i> Education
-      </a>    
+       
     </div>
     <div class="hamburger" on:click={() => menuOpen = !menuOpen}>
       <span></span>
