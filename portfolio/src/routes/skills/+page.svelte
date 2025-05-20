@@ -100,7 +100,9 @@
         <ul class="skill-list">
             {#each items as skill}
             <li class="skill-item">
-                <Icon icon={skill.icon} width="20" height="20" />
+                {#if skill.icon}
+                    <Icon icon={skill.icon} width="20" height="20" />
+                {/if}
                 {skill.name}
             </li>
             {/each}
