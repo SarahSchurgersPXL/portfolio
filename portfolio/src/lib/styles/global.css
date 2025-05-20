@@ -45,6 +45,7 @@ nav {
     text-decoration: none;
     padding: 10px 16px;
     font-weight: 600;
+    font-size: larger;
 }
 .nav-link:hover, .nav-link-brand:hover {
     border: #e9ecef solid 1px;
