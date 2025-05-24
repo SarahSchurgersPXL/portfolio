@@ -1,6 +1,29 @@
 <script>
   import Icon from "@iconify/svelte";
-  import { fly } from "svelte/transition";
+  import {
+    Timeline,
+    TimelineItem,
+    TimelineSeparator,
+    TimelineDot,
+    TimelineConnector,
+    TimelineContent,
+    TimelineOppositeContent,
+  } from "svelte-vertical-timeline";
+
+  import { onMount } from "svelte";
+
+  let isMobile = false;
+
+  onMount(() => {
+    const updateViewport = () => {
+      isMobile = window.innerWidth < 900;
+    };
+
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+
+    return () => window.removeEventListener("resize", updateViewport);
+  });
 
   const skills = {
     Frontend: [
@@ -32,6 +55,59 @@
     ],
   };
 
+  const educaction = [
+    {
+      title: "Bachelor of Applied Computer Science (Switch2IT)",
+      period: "2022 - 2025",
+      institution: "PXL University of Applied Sciences and Arts",
+      specialization: "Application Development",
+    },
+    {
+      title: "Bachelor of Agro- and Biotechnology",
+      period: "2013 - 2016",
+      institution: "PXL University of Applied Sciences and Arts",
+      specialization: "Cell and Gene Technology",
+    },
+  ];
+
+  const experiences = [
+    {
+      title: "Intern",
+      period: "March 2025 - June 2025",
+      institution: "Greenyard Prepared Belgium",
+      description:
+        "Developed an Android warehouse management application using Flutter.",
+    },
+    {
+      title: "Process Controller",
+      period: "September 2019 – Present",
+      institution: "Greenyard Prepared Belgium",
+      description:
+        "Ensuring quality, inspecting raw materials, calibrating sorting machines, and performing final product quality checks.",
+    },
+    {
+      title: "Consultant",
+      period: "June 2018 – August 2019",
+      institution: "Select Projects",
+      description:
+        "QC Chemist at Estée Lauder and R&D Assistant at Dirafrost.",
+    },
+    {
+      title: "Laboratory Technologist",
+      period: "March 2017 – May 2018",
+      institution: "Federal Public Service Finance",
+      description:
+        "Analyzing mineral oil samples and managing LIMS.",
+    },
+    {
+      title: "Laboratory Technologist",
+      period: "August 2016 – December 2016",
+      institution: "KU Leuven",
+      description:
+        "In vitro tissue culture of banana plants for the gene bank.",
+    },
+  ];
+
   const projects = [
     {
       title: "MoodTracker",
@@ -55,125 +131,107 @@
 </script>
 
 <section id="home">
-  <div>
-    <h1 class="name">Sarah Schurgers</h1>
-    <p>Applied Computer Science student @ Hogeschool PXL.</p>
-    <p>
-      Passionate about frontend development, intuitive UI/UX design, and smart
-      data processing.
-    </p>
-    <div class="socials">
-      <a
-        href="https://github.com/SarahSchurgersPXL"
-        target="_blank"
-        aria-label="GitHub"
-      >
-        <i class="fab fa-github"></i>
-      </a>
-      <a
-        href="https://www.linkedin.com/in/sarahschurgers/"
-        target="_blank"
-        aria-label="LinkedIn"
-      >
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="mailto:sarahschurgers@gmail.com" aria-label="E-mail">
-        <i class="fas fa-envelope"></i>
-      </a>
-    </div>
+  <h1 class="name">Sarah Schurgers</h1>
+  <p>Applied Computer Science student @ Hogeschool PXL.</p>
+  <p>
+    Passionate about frontend development, intuitive UI/UX design, and smart
+    data processing.
+  </p>
+  <div class="socials">
+    <a
+      href="https://github.com/SarahSchurgersPXL"
+      target="_blank"
+      aria-label="GitHub"
+    >
+      <i class="fab fa-github"></i>
+    </a>
+    <a
+      href="https://www.linkedin.com/in/sarahschurgers/"
+      target="_blank"
+      aria-label="LinkedIn"
+    >
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="mailto:sarahschurgers@gmail.com" aria-label="E-mail">
+      <i class="fas fa-envelope"></i>
+    </a>
   </div>
 </section>
 
 <section id="skills">
-  <div class="skills">
-    <h2>Skills</h2>
-    <div class="skills-section">
-      {#each Object.entries(skills) as [category, items]}
-        <div class="category">
-          <h3>{category.replace(/([A-Z])/g, " $1").trim()}</h3>
-          <ul class="skill-list">
-            {#each items as skill}
-              <li class="skill-item">
-                {#if skill.icon}
-                  <Icon icon={skill.icon} width="20" height="20" />
-                {/if}
-                {skill.name}
-              </li>
-            {/each}
-          </ul>
-        </div>
-      {/each}
-    </div>
+  <h2>Skills</h2>
+  <div class="skills-section">
+    {#each Object.entries(skills) as [category, items]}
+      <div class="category">
+        <h3>{category.replace(/([A-Z])/g, " $1").trim()}</h3>
+        <ul class="skill-list">
+          {#each items as skill}
+            <li class="skill-item">
+              {#if skill.icon}
+                <Icon icon={skill.icon} width="20" height="20" />
+              {/if}
+              {skill.name}
+            </li>
+          {/each}
+        </ul>
+      </div>
+    {/each}
   </div>
 </section>
 
 <section id="education">
-  <div class="edu">
-    <h2>Education</h2>
-    <div class="timeline">
-      <div class="entry" in:fly={{ y: 20, duration: 500 }}>
-        <h3>PXL University of Applied Sciences and Arts</h3>
-        <span>2022 – present</span>
-        <p>
-          Bachelor of Applied Computer Science (Switch2IT) – Application
-          Development
-        </p>
-      </div>
-
-      <div class="entry" in:fly={{ y: 20, duration: 500, delay: 300 }}>
-        <h3>PXL University of Applied Sciences and Arts</h3>
-        <span>2013 – 2016</span>
-        <p>Bachelor of Agro- and Biotechnology – Cell and Gene Technology</p>
-      </div>
-    </div>
-  </div>
+  <h2>Education</h2>
+  <Timeline position={isMobile ? "alternate" : "right"}>
+    {#each educaction as edu}
+      <TimelineItem style="margin-top: 2rem; margin-bottom: 1rem; padding: 0;">
+        <TimelineOppositeContent
+          slot="opposite-content"
+          style="max-width: 25rem; margin: 0;"
+        >
+          <p>{edu.period}</p>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot style="background-color: #fff; border-color:#fff;" />
+          <TimelineConnector
+            style="background-color: #fff; border-color:#fff;"
+          />
+        </TimelineSeparator>
+        <TimelineContent style="margin-top: 0; max-width: 25rem;">
+          <h3>{edu.title}</h3>
+          <h4>{edu.specialization}</h4>
+          <h5>{edu.institution}</h5>
+        </TimelineContent>
+      </TimelineItem>
+    {/each}
+  </Timeline>
 </section>
 
 <section id="experience">
   <div class="experience">
     <h2>Experience</h2>
-    <div class="timeline">
-      <div class="entry" in:fly={{ y: 20, duration: 500 }}>
-        <h3>Intern</h3>
-        <strong>Greenyard Prepared Belgium</strong>
-        <span>March 2025 – June 2025</span>
-        <p>
-          Developed an Android warehouse management application using Flutter.
-        </p>
-      </div>
-
-      <div class="entry" in:fly={{ y: 20, duration: 500, delay: 300 }}>
-        <h3>Process Controller</h3>
-        <strong>Greenyard Prepared Belgium</strong>
-        <span>September 2019 – Present</span>
-        <p class="line">
-          Ensuring quality, inspecting raw materials, calibrating sorting
-          machines,
-        </p>
-        <p>and performing final product quality checks.</p>
-      </div>
-
-      <div class="entry" in:fly={{ y: 20, duration: 500, delay: 600 }}>
-        <h3>Consultant</h3>
-        <strong>Select Projects</strong>
-        <span>June 2018 – August 2019</span>
-        <p>QC Chemist at Estée Lauder and R&D Assistant at Dirafrost.</p>
-      </div>
-
-      <div class="entry" in:fly={{ y: 20, duration: 500, delay: 900 }}>
-        <h3>Laboratory Technologist</h3>
-        <strong>Federal Public Service Finance</strong>
-        <span>March 2017 – May 2018</span>
-        <p>Analyzing mineral oil samples and managing LIMS.</p>
-      </div>
-
-      <div class="entry" in:fly={{ y: 20, duration: 500, delay: 1200 }}>
-        <h3>Laboratory Technologist</h3>
-        <strong>KU Leuven</strong>
-        <span>August 2016 – December 2016</span>
-        <p>In vitro tissue culture of banana plants for the gene bank.</p>
-      </div>
-    </div>
+    <Timeline position={isMobile ? "alternate" : "right"}>
+    {#each experiences as experience}
+      <TimelineItem style="margin-top: 2rem; margin-bottom: 1rem; padding: 0;">
+        <TimelineOppositeContent
+          slot="opposite-content"
+          style="max-width: 25rem; margin: 0;"
+        >
+          <p>{experience.period}</p>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot style="background-color: #fff; border-color:#fff;" />
+          <TimelineConnector
+            style="background-color: #fff; border-color:#fff;"
+          />
+        </TimelineSeparator>
+        <TimelineContent style="margin-top: 0; max-width: 25rem;">
+          <h3>{experience.title}</h3>          
+          <h5>{experience.institution}</h5>
+          <h4>{experience.description}</h4>
+        </TimelineContent>
+      </TimelineItem>
+    {/each}
+  </Timeline>
   </div>
 </section>
 
@@ -226,6 +284,8 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    margin-top: 1rem;
+    padding: 0rem 1rem;
   }
 
   #home a i {
@@ -313,12 +373,136 @@
     gap: 0.5rem;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.103);
     padding: 0.5rem 1rem;
     border-radius: 8px;
     font-weight: 500;
     animation: fadeIn 0.6s ease-in-out both;
     color: #fff;
+  }
+  .skill-item:hover {
+    background: rgba(255, 255, 255, 0.103);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+    font-weight: 550;
+  }
+
+  #skills div {
+    display: flex;
+    flex-direction: column;
+  }
+  /* Education */
+  #education {
+    padding-top: 4rem;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  #education h2 {
+    font-size: 3rem;
+    margin-bottom: 0rem;
+    color: #fff;
+  }
+
+  #education h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0rem;
+    color: #fff;
+    padding-bottom: 0rem;
+    margin-top: 0rem;
+    padding-left: 1rem;
+    padding-top: 0.2rem;
+  }
+
+  #education h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0rem;
+    margin-top: 0.8rem;
+    color: #fff;
+    padding-bottom: 0rem;
+    padding-left: 1rem;
+    padding-top: 0rem;
+    font-weight: 400;
+    font-style: italic;
+  }
+  #education h5 {
+    font-size: 1.3rem;
+    margin-bottom: 0rem;
+    margin-top: 0.8rem;
+    color: #fff;
+    padding-bottom: 0rem;
+    padding-left: 1rem;
+    padding-top: 0rem;
+    font-weight: 500;
+  }
+
+  #education p {
+    text-align: end;
+    padding-right: 1.5rem;
+    font-size: 1.5rem;
+  }
+  /* Experience */
+  #experience {
+    padding-top: 4rem;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  #experience h2 {
+    font-size: 3rem;
+    margin-bottom: 0rem;
+    color: #fff;
+  }
+
+  #experience h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0rem;
+    color: #fff;
+    padding-bottom: 0rem;
+    margin-top: 0rem;
+    padding-left: 1rem;
+    padding-top: 0.2rem;
+  }
+
+  #experience h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0rem;
+    margin-top: 0.8rem;
+    color: #fff;
+    padding-bottom: 0rem;
+    padding-left: 1rem;
+    padding-top: 0rem;
+    font-weight: 400;
+    font-style: italic;
+  }
+  #experience h5 {
+    font-size: 1.3rem;
+    margin-bottom: 0rem;
+    margin-top: 0.8rem;
+    color: #fff;
+    padding-bottom: 0rem;
+    padding-left: 1rem;
+    padding-top: 0rem;
+    font-weight: 500;
+  }
+
+  #experience p {
+    text-align: end;
+    padding-right: 1.5rem;
+    font-size: 1.5rem;
   }
 
   section {
@@ -432,53 +616,6 @@
     margin-bottom: 1rem;
   }
 
-  .edu {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .timeline {
-    position: relative;
-    margin: 2rem 0;
-    padding-left: 2rem;
-    border-left: 4px solid #ccc;
-  }
-
-  .entry {
-    position: relative;
-    margin-bottom: 2rem;
-    padding-left: 1rem;
-  }
-
-  .entry::before {
-    content: "";
-    position: absolute;
-    left: -10px;
-    top: 0;
-    width: 16px;
-    height: 16px;
-    background-color: #353535;
-    border-radius: 50%;
-    border: 2px solid white;
-  }
-
-  .entry h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #222;
-  }
-
-  .entry span {
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  .entry p {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-  }
-
   .experience {
     display: flex;
     align-items: center;
@@ -527,6 +664,7 @@
 
     #home a {
       font-size: 2rem;
+      padding: 0rem 0.5rem;
     }
 
     #home a i {
@@ -571,6 +709,47 @@
       display: flex;
       flex-wrap: wrap;
       margin-bottom: 0rem;
+    }
+    .skill-item {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 400;
+      font-size: medium;
+    }
+
+    #education{
+      padding-top: 1rem;
+      padding-right: 0.2rem;
+      padding-left: 0.2rem;
+    }
+
+    #education h2 {
+      margin-top: 1rem;
+      font-size: 2rem;
+    }
+
+    #education h3 {
+      font-size: 1.1rem;
+      font-weight: 550;
+      padding-left: 0.5rem;
+      padding-right: 0rem;
+    }
+
+    #education h4 {
+      font-size: 1rem;
+      padding-left: 0.5rem;
+      padding-right: 0rem;
+    }
+    #education h5 {
+      font-size: 1.0rem;
+      padding-left: 0.5rem;
+      padding-right: 0rem;
+
+    }
+    #education p {
+      text-align: end;
+      padding-right: 1.5rem;
+      font-size: 1.1rem;
     }
   }
 </style>
