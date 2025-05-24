@@ -89,15 +89,13 @@
       title: "Consultant",
       period: "June 2018 – August 2019",
       institution: "Select Projects",
-      description:
-        "QC Chemist at Estée Lauder and R&D Assistant at Dirafrost.",
+      description: "QC Chemist at Estée Lauder and R&D Assistant at Dirafrost.",
     },
     {
       title: "Laboratory Technologist",
       period: "March 2017 – May 2018",
       institution: "Federal Public Service Finance",
-      description:
-        "Analyzing mineral oil samples and managing LIMS.",
+      description: "Analyzing mineral oil samples and managing LIMS.",
     },
     {
       title: "Laboratory Technologist",
@@ -113,7 +111,7 @@
       title: "MoodTracker",
       slug: "moodtracker",
       description: "PWA to track daily mood and journal using Angular.",
-      image: "very-happy.png",
+      image: "mood.png",
     },
     {
       title: "Bookkeeper",
@@ -126,6 +124,7 @@
       slug: "warehouse-app",
       description:
         "Flutter-based Android app for barcode scanning and inventory control.",
+      image: "flutter.png",
     },
   ];
 </script>
@@ -207,9 +206,8 @@
 </section>
 
 <section id="experience">
-  <div class="experience">
-    <h2>Experience</h2>
-    <Timeline position={isMobile ? "alternate" : "right"}>
+  <h2>Experience</h2>
+  <Timeline position={isMobile ? "alternate" : "right"}>
     {#each experiences as experience}
       <TimelineItem style="margin-top: 2rem; margin-bottom: 1rem; padding: 0;">
         <TimelineOppositeContent
@@ -225,32 +223,29 @@
           />
         </TimelineSeparator>
         <TimelineContent style="margin-top: 0; max-width: 25rem;">
-          <h3>{experience.title}</h3>          
+          <h3>{experience.title}</h3>
           <h5>{experience.institution}</h5>
           <h4>{experience.description}</h4>
         </TimelineContent>
       </TimelineItem>
     {/each}
   </Timeline>
-  </div>
 </section>
 
 <section id="projects">
-  <div class="projects">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      {#each projects as project}
-        <a class="project-card" href={`/projects/${project.slug}`}>
-          <img
-            class="single-img"
-            src={project.image}
-            alt="{project.title} preview"
-          />
-          <h2>{project.title}</h2>
-          <p>{project.description}</p>
-        </a>
-      {/each}
-    </div>
+  <h2>Projects</h2>
+  <div class="project-grid">
+    {#each projects as project}
+      <a class="project-card" href={`/projects/${project.slug}`}>
+        <img
+          class="single-img"
+          src={project.image}
+          alt="{project.title} preview"
+        />
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+      </a>
+    {/each}
   </div>
 </section>
 
@@ -505,6 +500,85 @@
     font-size: 1.5rem;
   }
 
+  /* Projects */
+  #projects {
+    padding-top: 4rem;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  #projects h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+
+  #projects h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0rem;
+    color: #fff;
+    padding-bottom: 0rem;
+    margin-top: 0rem;
+    padding-top: 0.2rem;
+    text-align: center;
+  }
+
+  #projects p {
+    font-size: 1rem;
+    margin-bottom: 0rem;
+    margin-top: 0.8rem;
+    color: #fff;
+    padding-bottom: 0rem;
+    padding-top: 0rem;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    padding: 0 2rem;
+  }
+
+  .project-card {
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.014);
+    padding: 1.5rem;
+    border-radius: 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  .single-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
   section {
     scroll-snap-align: start;
     padding-top: 2rem;
@@ -563,63 +637,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-  }
-
-  .projects {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    padding: 0 2rem;
-  }
-
-  .project-card {
-    background: #f9f9f9;
-    padding: 1.5rem;
-    border-radius: 20px;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-  }
-
-  .project-card h2 {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
-    color: #333;
-  }
-
-  .project-card p {
-    margin: 0;
-    font-size: 1rem;
-    color: #666;
-  }
-
-  .single-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-  }
-
-  .experience {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
   }
 
   @media (max-width: 900px) {
@@ -717,39 +734,54 @@
       font-size: medium;
     }
 
-    #education{
+    #education,
+    #experience {
       padding-top: 1rem;
       padding-right: 0.2rem;
       padding-left: 0.2rem;
     }
 
-    #education h2 {
-      margin-top: 1rem;
+    #education h2,
+    #experience h2 {
+      margin-top: 4rem;
       font-size: 2rem;
     }
 
-    #education h3 {
+    #education h3,
+    #experience h3 {
       font-size: 1.1rem;
       font-weight: 550;
       padding-left: 0.5rem;
       padding-right: 0rem;
     }
 
-    #education h4 {
+    #education h4,
+    #experience h4 {
       font-size: 1rem;
       padding-left: 0.5rem;
       padding-right: 0rem;
     }
-    #education h5 {
-      font-size: 1.0rem;
+    #education h5,
+    #experience h5 {
+      font-size: 1rem;
       padding-left: 0.5rem;
       padding-right: 0rem;
-
     }
-    #education p {
+    #education p,
+    #experience p {
       text-align: end;
       padding-right: 1.5rem;
       font-size: 1.1rem;
+    }
+
+    #projects h2 {
+      margin-top: 4rem;
+      font-size: 2rem;
+      margin-top: 0;
+    }
+
+    #projects {
+      padding-bottom: 5rem;
     }
   }
 </style>
