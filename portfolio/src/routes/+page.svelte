@@ -37,13 +37,7 @@
       title: "MoodTracker",
       slug: "moodtracker",
       description: "PWA to track daily mood and journal using Angular.",
-      images: [
-        "angry.png",
-        "sad.png",
-        "neutral.png",
-        "happy.png",
-        "very-happy.png",
-      ],
+      image: "very-happy.png",
     },
     {
       title: "Bookkeeper",
@@ -63,12 +57,11 @@
 <section id="home">
   <div>
     <h1 class="name">Sarah Schurgers</h1>
-    <p>Motivated final-year Applied Computer Science student (Switch2IT).</p>
+    <p>Applied Computer Science student @ Hogeschool PXL.</p>
     <p>
       Passionate about frontend development, intuitive UI/UX design, and smart
       data processing.
     </p>
-    <p>Eager to turn ideas into clean, user-friendly digital experiences.</p>
     <div class="socials">
       <a
         href="https://github.com/SarahSchurgersPXL"
@@ -97,7 +90,7 @@
     <div class="skills-section">
       {#each Object.entries(skills) as [category, items]}
         <div class="category">
-          <h2>{category.replace(/([A-Z])/g, " $1").trim()}</h2>
+          <h3>{category.replace(/([A-Z])/g, " $1").trim()}</h3>
           <ul class="skill-list">
             {#each items as skill}
               <li class="skill-item">
@@ -190,19 +183,11 @@
     <div class="project-grid">
       {#each projects as project}
         <a class="project-card" href={`/projects/${project.slug}`}>
-          {#if project.images}
-            <div class="image-row">
-              {#each project.images as img}
-                <img src={img} alt="MoodTracker preview" />
-              {/each}
-            </div>
-          {:else if project.image}
-            <img
-              class="single-img"
-              src={project.image}
-              alt="{project.title} preview"
-            />
-          {/if}
+          <img
+            class="single-img"
+            src={project.image}
+            alt="{project.title} preview"
+          />
           <h2>{project.title}</h2>
           <p>{project.description}</p>
         </a>
@@ -212,41 +197,160 @@
 </section>
 
 <style>
-  section {
-    scroll-snap-align: start;
-    padding-top: 100px;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    height: 100vh;
-    overflow: hidden;
-    box-sizing: border-box;
+  /* Home */
+  #home {
+    padding-top: 15rem;
+    color: #333;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #home p {
+    margin: 4px 0;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    max-width: 750px;
+    animation: fadeIn 1s ease-in-out both;
+    animation-delay: 1s;
+  }
+
+  #home a {
+    color: #fff;
+    font-size: 2.8rem;
+    animation: fadeIn 1s ease-in-out both;
+    animation-delay: 2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  #home a i {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #home a:hover i {
+    transform: scale(1.15);
+  }
+  .name {
+    font-size: 5rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    padding-top: 1rem;
+    background: linear-gradient(
+      90deg,
+      #f9f9f9,
+      #ffd9da,
+      #ffe6de,
+      #eec9d0,
+      #ecdcdf
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeIn 1s ease-in-out both;
+  }
+
+  /* Skills */
+  #skills {
+    padding-top: 3rem;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 7rem;
+  }
+
+  #skills h2 {
+    font-size: 3rem;
+    margin-bottom: 0rem;
+    color: #fff;
+  }
+
+  #skills h3 {
+    font-size: 2rem;
+    margin-bottom: 0rem;
+    color: #fff;
+  }
+  .category {
+    margin-bottom: 0.5rem;
+    align-items: center;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .skills-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+  }
+  ul.skill-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0rem;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    animation: fadeIn 0.6s ease-in-out both;
+    color: #fff;
+  }
+
+  section {
+    scroll-snap-align: start;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow: auto;
+    display: block;
+    margin-bottom: 2rem;
   }
 
   section h2 {
-    font-size: 50px;
+    font-size: 2.5rem;
     text-align: center;
-    margin-bottom: 30px;
-    margin-top: 0px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 
-  .name {
-    font-size: 100px;
-    font-weight: 600;
-    color: #353535;
-    text-decoration: none;
-    margin-top: 200px;
-    margin-bottom: 10px;
-  }
   div {
     display: flex;
     flex-direction: column;
   }
   p {
     margin: 4px 0;
-    font-size: 20px;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    max-width: 750px;
   }
 
   .socials {
@@ -254,54 +358,16 @@
     flex-direction: row;
     margin-top: 8px;
     gap: 15px;
+    justify-content: center;
   }
 
   a {
-    color: #353535;
-    font-size: 1.8rem;
-  }
-  .skills {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    color: #fff;
+    font-size: 2.8rem;
   }
 
   h1 {
-    font-size: 50px;
-  }
-
-  .skills-section {
-    margin: 1rem 0;
-  }
-
-  .category {
-    margin-bottom: 1rem;
-    align-items: start;
-  }
-
-  .category h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-
-  ul.skill-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .skill-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: #e3e3e3;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-weight: 500;
-    animation: fadeIn 0.6s ease-in-out both;
+    font-size: 3rem;
   }
 
   @keyframes fadeIn {
@@ -321,16 +387,10 @@
     flex-direction: column;
   }
 
-  h2 {
-    font-size: 50px;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
   .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: 1rem;
     padding: 0 2rem;
   }
 
@@ -364,26 +424,9 @@
     color: #666;
   }
 
-  .image-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-    overflow-x: auto;
-    margin-bottom: 1rem;
-    margin-top: 3.3rem;
-  }
-
-  .image-row img {
-    width: 75px;
-    height: 75px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
   .single-img {
     width: 100%;
-    max-height: 200px;
+    height: auto;
     object-fit: contain;
     border-radius: 12px;
     margin-bottom: 1rem;
@@ -440,5 +483,94 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+  }
+
+  @media (max-width: 900px) {
+    .name {
+      font-size: 4rem;
+    }
+
+    section h2 {
+      font-size: 2rem;
+    }
+
+    .skills-section {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .skill-list {
+      justify-content: center;
+    }
+
+    .project-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    p {
+      margin: 4px 0;
+      font-size: 1.3rem;
+      color: #fff;
+      text-align: center;
+    }
+
+    #home {
+      padding-top: 5rem;
+      color: #333;
+      text-align: center;
+    }
+
+    #home p {
+      margin: 4px 0;
+      font-size: 1.3rem;
+    }
+
+    #home a {
+      font-size: 2rem;
+    }
+
+    #home a i {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #home a:hover i {
+      transform: scale(1.15);
+    }
+
+    #skills {
+      padding-top: 1rem;
+      padding-bottom: 5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .skills-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 50rem;
+      padding-top: 0rem;
+    }
+
+    #skills h2 {
+      font-size: 2rem;
+      margin-bottom: 0rem;
+      color: #fff;
+    }
+
+    #skills h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0rem;
+      color: #fff;
+      margin-top: 0.5rem;
+    }
+
+    ul.skill-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 0rem;
+    }
   }
 </style>

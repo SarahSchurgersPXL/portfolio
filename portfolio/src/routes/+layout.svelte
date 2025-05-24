@@ -30,18 +30,6 @@
 
 <style global>
   @import '$lib/styles/global.css';
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: #f8f9fa;
-  }
-  .nav-link.active {
-    background: #e9ecef;
-    color: #353535 !important;
-    border-radius: 4px;
-    transition: background 0.2s;
-  }
 </style>
 
 <nav>
