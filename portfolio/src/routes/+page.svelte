@@ -545,7 +545,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
-    padding: 0 2rem;
+    padding: 5rem 2rem;
     max-width: 900px;
   }
 

@@ -7,6 +7,12 @@
       title: "Bookkeeper",
       description: "React Native app to log and organize your reading journey.",
       tech: ["React Native", "Expo", "TypeScript"],
+      images: [
+        "bookkeeper.jpg",
+        "bookkeeper2.jpg",
+        "bookkeeper3.jpg",
+        "bookkeeper4.jpg",
+      ],
     },
     "warehouse-app": {
       title: "Warehouse Manager",
@@ -19,6 +25,14 @@
       description:
         "MoodTracker is a Progressive Web App that lets users log their daily moods using five icons and optional notes. Built with Angular and hosted on Vercel, the app works offline and can be installed on mobile devices. Data is stored securely in Supabase, which also handles user authentication.",
       tech: ["Angular", "PWA", "TypeScript"],
+      images: [
+        "moodtracker.png",
+        "moodtracker2.png",
+        "moodtracker-detail.png",
+        "moodtracker-line.png",
+        "moodtracker-month.png",
+        "moodtracker-pie.png",
+      ]
     },
   } as const;
 
@@ -49,12 +63,21 @@
 
 <style>
   .project {
+    padding-top: 3rem;
+    color: #fff;
+    text-align: center;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    margin-top: 50px;
-    margin-right: 20px;
-    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 7rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0rem;
+    color: #fff;
   }
   .project-detail {
     display: flex;
@@ -72,5 +95,6 @@
     margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
+    max-width: 600px;
   }
 </style>
