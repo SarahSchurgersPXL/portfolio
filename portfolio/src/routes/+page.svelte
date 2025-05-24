@@ -546,6 +546,7 @@
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
     padding: 0 2rem;
+    max-width: 900px;
   }
 
   .project-card {
@@ -778,10 +779,16 @@
       margin-top: 4rem;
       font-size: 2rem;
       margin-top: 0;
+      padding-bottom: 1rem;
     }
 
     #projects {
       padding-bottom: 5rem;
+    }
+    .project-grid {
+      grid-template-columns: 1fr;
+      max-width: 100%;
+      padding: 0 0.5rem;
     }
   }
 </style>
