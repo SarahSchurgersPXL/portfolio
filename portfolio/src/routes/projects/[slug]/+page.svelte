@@ -1,10 +1,10 @@
 <script lang="ts">
   export let data: { slug: string };
   const { slug } = data;
-  import { onMount, onDestroy } from 'svelte';
-  import EmblaCarousel from 'embla-carousel';
+  import { onMount, onDestroy } from "svelte";
+  import EmblaCarousel from "embla-carousel";
   import Autoplay from "embla-carousel-autoplay";
-  import Icon from '@iconify/svelte';
+  import Icon from "@iconify/svelte";
 
   let emblaNode: HTMLDivElement;
   let embla: any;
@@ -28,10 +28,12 @@
 
   onMount(() => {
     autoplay = Autoplay({ delay: 4000, stopOnInteraction: true });
-    const viewport = emblaNode.querySelector('.embla__viewport');
+    const viewport = emblaNode.querySelector(".embla__viewport");
     if (viewport) {
-      embla = EmblaCarousel(viewport as HTMLElement, { loop: true }, [autoplay]);
-      embla.on('select', updateSelected);
+      embla = EmblaCarousel(viewport as HTMLElement, { loop: true }, [
+        autoplay,
+      ]);
+      embla.on("select", updateSelected);
       updateSelected();
     }
     return () => {
@@ -43,14 +45,13 @@
     embla && embla.destroy();
   });
 
-
   type Project = {
     title: string;
     description: string;
     tech: readonly string[];
     images?: string[];
   };
-  
+
   const projectDetails = {
     bookkeeper: {
       title: "Bookkeeper",
@@ -62,7 +63,7 @@
     `,
       tech: ["React Native", "TypeScript", "Expo"],
       images: [
-        "bookkeeper.jpg",        
+        "bookkeeper.jpg",
         "bookkeeper3.jpg",
         "bookkeeper4.jpg",
         "bookkeeper2.jpg",
@@ -98,21 +99,21 @@
 
   type ProjectKey = keyof typeof projectDetails;
   const project = projectDetails[slug as ProjectKey] as Project;
-  
+
   const images = project.images ?? [];
 
   const techIcons: Record<string, string> = {
-    'React Native': 'mdi:react',
-    Expo: 'simple-icons:expo',
-    TypeScript: 'mdi:language-typescript',
-    Flutter: 'simple-icons:flutter', // <-- use simple-icons for Flutter
-    Angular: 'mdi:angular',
-    PWA: 'mdi:progress-wrench',
-    Supabase: 'simple-icons:supabase',
-    Vercel: 'simple-icons:vercel',
-    GitHub: 'mdi:github',
-    Dart: 'simple-icons:dart',
-    'Git': 'mdi:git',
+    "React Native": "mdi:react",
+    Expo: "simple-icons:expo",
+    TypeScript: "mdi:language-typescript",
+    Flutter: "simple-icons:flutter", // <-- use simple-icons for Flutter
+    Angular: "mdi:angular",
+    PWA: "mdi:progress-wrench",
+    Supabase: "simple-icons:supabase",
+    Vercel: "simple-icons:vercel",
+    GitHub: "mdi:github",
+    Dart: "simple-icons:dart",
+    Git: "mdi:git",
   };
 </script>
 
@@ -127,7 +128,12 @@
         {#each project.tech as t}
           <li>
             {#if techIcons[t]}
-              <Icon icon={techIcons[t]} width="1.5em" height="1.5em" style="vertical-align: middle; margin-right: 0.5em;" />
+              <Icon
+                icon={techIcons[t]}
+                width="1.5em"
+                height="1.5em"
+                style="vertical-align: middle; margin-right: 0.5em;"
+              />
             {/if}
             {t}
           </li>
@@ -135,44 +141,67 @@
       </ul>
     </div>
     {#if images.length}
-  <div class="embla__controls-side">
-    <button class="embla__button" on:click={scrollPrev} aria-label="Previous image">
-      <!-- Left Arrow SVG -->
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-        <path d="M15 18l-6-6 6-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <div class="embla__carousel-wrapper">
-      <div class="embla" bind:this={emblaNode}>
-        <div class="embla__viewport">
-          <div class="embla__container">
-            {#each images as image}
-              <div class="embla__slide">
-                <img class="carousel-img" src={`/${image}`} alt={project.title} />
+      <div class="embla__controls-side">
+        <button
+          class="embla__button"
+          on:click={scrollPrev}
+          aria-label="Previous image"
+        >
+          <!-- Left Arrow SVG -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M15 18l-6-6 6-6"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <div class="embla__carousel-wrapper">
+          <div class="embla" bind:this={emblaNode}>
+            <div class="embla__viewport">
+              <div class="embla__container">
+                {#each images as image}
+                  <div class="embla__slide">
+                    <img
+                      class="carousel-img"
+                      src={`/${image}`}
+                      alt={project.title}
+                    />
+                  </div>
+                {/each}
               </div>
+            </div>
+          </div>
+          <div class="embla__dots">
+            {#each images as _, idx}
+              <button
+                class="embla__dot {selectedIndex === idx ? 'is-selected' : ''}"
+                aria-label={`Go to slide ${idx + 1}`}
+                on:click={() => scrollTo(idx)}
+              ></button>
             {/each}
           </div>
         </div>
+        <button
+          class="embla__button"
+          on:click={scrollNext}
+          aria-label="Next image"
+        >
+          <!-- Right Arrow SVG -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 6l6 6-6 6"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
       </div>
-      <div class="embla__dots">
-        {#each images as _, idx}
-          <button
-            class="embla__dot {selectedIndex === idx ? 'is-selected' : ''}"
-            aria-label={`Go to slide ${idx + 1}`}
-            on:click={() => scrollTo(idx)}
-          ></button>
-        {/each}
-      </div>
-    </div>
-    <button class="embla__button" on:click={scrollNext} aria-label="Next image">
-      <!-- Right Arrow SVG -->
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-        <path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-  </div>
-
-{/if}
+    {/if}
   {:else}
     <div class="not-found">
       <h1>Project not found</h1>
@@ -233,18 +262,18 @@
   }
   .embla__slide {
     position: relative;
-    flex: 0 0 100%; 
+    flex: 0 0 100%;
     min-width: 0;
     display: flex;
-    justify-content: center; 
-    align-items: start;     
+    justify-content: center;
+    align-items: start;
   }
   .carousel-img {
-    width: 100%;      
-    max-width: 25rem; 
+    width: 100%;
+    max-width: 25rem;
     height: auto;
     display: block;
-    margin: 0 auto;   
+    margin: 0 auto;
     border-radius: 12px;
   }
 
@@ -304,17 +333,42 @@
   }
 
   .tech-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem;
-  justify-content: center;
-}
-.tech-list li {
-  display: flex;
-  align-items: center;
-  font-size: 1.1rem;
-  color: #fff;
-}
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+  }
+  .tech-list li {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .project-title {
+      font-size: 2.5rem;
+      margin-bottom: 0;
+    }
+    .description {
+      font-size: 1.1rem;
+    }  
+    .project-detail,
+    .embla__controls-side {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .embla__button {
+      width: 3rem;
+      height: 3rem;
+      font-size: 2.2rem;
+      min-width: 3rem;
+      min-height: 3rem;
+    }
+    .embla__controls-side {
+      gap: 0.5rem;
+    }
+  }
 </style>

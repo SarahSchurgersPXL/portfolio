@@ -180,7 +180,8 @@
 
 <section id="education">
   <h2>Education</h2>
-  <Timeline position={isMobile ? "alternate" : "right"}>
+  <Timeline position={isMobile ? "alternate" : "right"}
+  style={isMobile ? "padding: 0rem;" : ""}>
     {#each educaction as edu}
       <TimelineItem style="margin-top: 2rem; margin-bottom: 1rem; padding: 0;">
         <TimelineOppositeContent
@@ -207,7 +208,8 @@
 
 <section id="experience">
   <h2>Experience</h2>
-  <Timeline position={isMobile ? "alternate" : "right"}>
+  <Timeline position={isMobile ? "alternate" : "right"}
+  style={isMobile ? "padding: 0rem;" : ""}>
     {#each experiences as experience}
       <TimelineItem style="margin-top: 2rem; margin-bottom: 1rem; padding: 0;">
         <TimelineOppositeContent
@@ -708,12 +710,6 @@
       padding-top: 0rem;
     }
 
-    #skills h2 {
-      font-size: 2rem;
-      margin-bottom: 0rem;
-      color: #fff;
-    }
-
     #skills h3 {
       font-size: 1.5rem;
       margin-bottom: 0rem;
@@ -743,7 +739,7 @@
     }
 
     #education h2,
-    #experience h2 {
+    #experience h2, #skills h2 {
       margin-top: 4rem;
       font-size: 2rem;
     }
