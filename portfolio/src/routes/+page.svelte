@@ -453,7 +453,7 @@
     align-items: center;
     justify-content: center;
     padding-bottom: 10.5rem;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
   }
   #experience h2 {

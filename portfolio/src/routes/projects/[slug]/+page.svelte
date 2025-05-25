@@ -2,9 +2,9 @@
   export let data: { slug: string };
   const { slug } = data;
   import { onMount, onDestroy } from 'svelte';
-  import emblaCarouselSvelte from "embla-carousel-svelte";
   import EmblaCarousel from 'embla-carousel';
   import Autoplay from "embla-carousel-autoplay";
+  import Icon from '@iconify/svelte';
 
   let emblaNode: HTMLDivElement;
   let embla: any;
@@ -54,26 +54,37 @@
   const projectDetails = {
     bookkeeper: {
       title: "Bookkeeper",
-      description: "React Native app to log and organize your reading journey.",
-      tech: ["React Native", "Expo", "TypeScript"],
+      description: `
+      Bookkeeper is a React Native mobile application I developed as a practice project to strengthen my app development skills.
+      The app allows users to organize and log their reading journey using three categories: 'To Read', 'Currently Reading', and 'Read'. 
+      Users can search for books using an external API, track their reading progress, and add personal notes. 
+      This project helped me improve my understanding of navigation, state management, and API integration in a cross-platform environment using Expo and TypeScript.
+    `,
+      tech: ["React Native", "TypeScript", "Expo"],
       images: [
-        "bookkeeper.jpg",
-        "bookkeeper2.jpg",
+        "bookkeeper.jpg",        
         "bookkeeper3.jpg",
         "bookkeeper4.jpg",
+        "bookkeeper2.jpg",
       ],
     },
     "warehouse-app": {
       title: "Warehouse Manager",
-      description:
-        "Flutter-based Android app for barcode scanning and inventory control.",
-      tech: ["Flutter"],
+      description: `
+      This project was developed during my internship at Greenyard Prepared Belgium.
+      Warehouse Manager is a Flutter-based Android application built to support internal warehouse operations. 
+      The app is designed to work with Zebra MC9401 devices for barcode scanning, and facilitates stock movement logging and inventory management.
+    `,
+      tech: ["Flutter", "Dart", "Git"],
     },
     moodtracker: {
       title: "MoodTracker",
-      description:
-        "MoodTracker is a Progressive Web App that lets users log their daily moods using five icons and optional notes. Built with Angular and hosted on Vercel, the app works offline and can be installed on mobile devices. Data is stored securely in Supabase, which also handles user authentication.",
-      tech: ["Angular", "PWA", "TypeScript"],
+      description: `
+      MoodTracker is a Progressive Web App that enables users to log their daily mood using five expressive icons and optional notes.
+      Built with Angular and hosted on Vercel, the app works offline, can be installed on mobile devices, and stores data securely using Supabase, which also handles user authentication.
+      This project gave me hands-on experience with building PWA functionality, implementing modern UI/UX principles, and connecting frontend logic with a real-time backend.
+    `,
+      tech: ["Angular", "TypeScript", "PWA", "Supabase", "Vercel", "GitHub"],
       images: [
         "moodtracker.png",
         "moodtracker2.png",
@@ -89,6 +100,20 @@
   const project = projectDetails[slug as ProjectKey] as Project;
   
   const images = project.images ?? [];
+
+  const techIcons: Record<string, string> = {
+    'React Native': 'mdi:react',
+    Expo: 'simple-icons:expo',
+    TypeScript: 'mdi:language-typescript',
+    Flutter: 'simple-icons:flutter', // <-- use simple-icons for Flutter
+    Angular: 'mdi:angular',
+    PWA: 'mdi:progress-wrench',
+    Supabase: 'simple-icons:supabase',
+    Vercel: 'simple-icons:vercel',
+    GitHub: 'mdi:github',
+    Dart: 'simple-icons:dart',
+    'Git': 'mdi:git',
+  };
 </script>
 
 <div class="project">
@@ -100,7 +125,12 @@
       <h3>Technologies used:</h3>
       <ul class="tech-list">
         {#each project.tech as t}
-          <li>{t}</li>
+          <li>
+            {#if techIcons[t]}
+              <Icon icon={techIcons[t]} width="1.5em" height="1.5em" style="vertical-align: middle; margin-right: 0.5em;" />
+            {/if}
+            {t}
+          </li>
         {/each}
       </ul>
     </div>
@@ -185,7 +215,7 @@
     margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
-    max-width: 600px;
+    max-width: 700px;
   }
 
   .embla {
@@ -203,18 +233,18 @@
   }
   .embla__slide {
     position: relative;
-    flex: 0 0 100%; /* Show 1 slide at a time */
+    flex: 0 0 100%; 
     min-width: 0;
     display: flex;
-    justify-content: center; /* Center image horizontally */
-    align-items: start;     /* Center image vertically if you want */
+    justify-content: center; 
+    align-items: start;     
   }
   .carousel-img {
-    width: 100%;      /* Fill the slide */
-    max-width: 25rem; /* Optional: limit image size */
+    width: 100%;      
+    max-width: 25rem; 
     height: auto;
     display: block;
-    margin: 0 auto;   /* Center if image is smaller than slide */
+    margin: 0 auto;   
     border-radius: 12px;
   }
 
@@ -272,4 +302,19 @@
     max-width: 28rem;
     width: 100%;
   }
+
+  .tech-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+}
+.tech-list li {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #fff;
+}
 </style>
